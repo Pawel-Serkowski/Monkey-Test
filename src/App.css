@@ -5,6 +5,7 @@
   --light-color: #f8ede3;
   --light-main-color: #dfd3c3;
   --dark-main-color: #d0b8a8;
+  --error-color: #ff0000;
 }
 
 * {

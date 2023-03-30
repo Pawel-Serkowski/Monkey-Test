@@ -15,3 +15,8 @@
   cursor: default;
   background-color: var(--light-main-color);
 }
+.value-box.error {
+  background-color: var(--error-color);
+  border-color: var(--light-color);
+  color: var(--light-color);
+}
