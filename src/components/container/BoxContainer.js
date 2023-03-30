@@ -31,16 +31,15 @@ const BoxContainer = () => {
     return false;
   };
 
-  const hideTilesHandler = () => {
-    setIsAllOpen(false);
-  };
-
-  const showTilesHandler = () => {
-    setIsAllOpen(true);
-    setTimeout(hideTilesHandler, ((level - 1) * 2 + 1) * 1000);
-  };
-
   useEffect(() => {
+    const hideTilesHandler = () => {
+      setIsAllOpen(false);
+    };
+
+    const showTilesHandler = () => {
+      setIsAllOpen(true);
+      setTimeout(hideTilesHandler, ((level - 1) * 2 + 1) * 1000);
+    };
     showTilesHandler();
   }, []);
 
