@@ -1,0 +1,16 @@
+.start-button {
+  outline: none;
+  border: 2px solid var(--dark-color);
+  color: var(--dark-main-color);
+  font-size: 20px;
+  cursor: pointer;
+  width: 200px;
+  height: 40px;
+  transition: all 0.4s;
+  margin-top: 20px;
+}
+.start-button:hover {
+  color: var(--dark-color);
+  background-color: var(--dark-main-color);
+  border-color: var(--light-color);
+}

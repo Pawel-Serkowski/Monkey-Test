@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import "./ValueBox.css";
 
@@ -11,6 +11,14 @@ const ValueBox = (props) => {
     setIsActive(true);
     setIsError(props.checkingFunc(props.value));
   };
+
+  useEffect(() => {
+    if (!props.isGameStarted) {
+      return;
+    }
+    setIsError(false);
+    setIsActive(false);
+  }, [props.isGameStarted]);
 
   return (
     <div

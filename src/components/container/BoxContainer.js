@@ -5,12 +5,13 @@ import { generateLevel } from "./generate-level";
 import "./BoxContainer.css";
 
 const level = 3;
-const tiles = generateLevel(level);
-const how_many_tiles = tiles.length;
+const how_many_tiles = level * level;
 
-const BoxContainer = () => {
+const BoxContainer = (props) => {
   const [isAllOpen, setIsAllOpen] = useState(false);
+  const [tiles, setTiles] = useState([]);
   const correctNextNumber = useRef(1);
+  const timer = useRef(undefined);
 
   const STYLE = {
     gridTemplateColumns: `repeat(${level}, 1fr)`,
@@ -22,11 +23,13 @@ const BoxContainer = () => {
   const checkCorrectness = (clicked_number) => {
     if (clicked_number !== correctNextNumber.current) {
       setIsAllOpen(true);
+      props.func();
+      props.func("You failed");
       return true;
     }
     correctNextNumber.current = correctNextNumber.current + 1;
     if (clicked_number === how_many_tiles) {
-      console.log("You win");
+      props.func("You Won!");
     }
     return false;
   };
@@ -35,13 +38,20 @@ const BoxContainer = () => {
     const hideTilesHandler = () => {
       setIsAllOpen(false);
     };
-
     const showTilesHandler = () => {
+      setTiles(generateLevel(level));
       setIsAllOpen(true);
-      setTimeout(hideTilesHandler, ((level - 1) * 2 + 1) * 1000);
+      timer.current = setTimeout(hideTilesHandler, (level - 1) * 3 * 1000);
     };
+    if (timer.current) clearTimeout(timer.current);
+
+    if (!props.isGameStarted) {
+      setIsAllOpen(true);
+      correctNextNumber.current = 1;
+      return;
+    }
     showTilesHandler();
-  }, []);
+  }, [props.isGameStarted]);
 
   return (
     <section className="box-container" style={STYLE}>
@@ -52,6 +62,7 @@ const BoxContainer = () => {
             key={value}
             isAllOpen={isAllOpen}
             checkingFunc={checkCorrectness}
+            isGameStarted={props.isGameStarted}
           />
         );
       })}
