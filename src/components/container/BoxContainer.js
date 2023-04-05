@@ -4,20 +4,20 @@ import ValueBox from "../boxes/ValueBox";
 import { generateLevel } from "./generate-level";
 import "./BoxContainer.css";
 
-const level = 3;
-const how_many_tiles = level * level;
-
 const BoxContainer = (props) => {
+  const level = useRef(props.level);
+  const how_many_tiles = level.current * level.current;
+
   const [isAllOpen, setIsAllOpen] = useState(false);
   const [tiles, setTiles] = useState([]);
   const correctNextNumber = useRef(1);
   const timer = useRef(undefined);
 
   const STYLE = {
-    gridTemplateColumns: `repeat(${level}, 1fr)`,
-    gridTemplateRows: `repeat(${level}, 1fr)`,
-    width: `${100 * 0.75 * level}px`,
-    height: `${100 * 0.75 * level}px`,
+    gridTemplateColumns: `repeat(${level.current}, 1fr)`,
+    gridTemplateRows: `repeat(${level.current}, 1fr)`,
+    width: `${100 * 0.75 * level.current}px`,
+    height: `${100 * 0.75 * level.current}px`,
   };
 
   const checkCorrectness = (clicked_number) => {
@@ -37,11 +37,11 @@ const BoxContainer = (props) => {
 
   useEffect(() => {
     const showTilesHandler = () => {
-      setTiles(generateLevel(level));
+      setTiles(generateLevel(level.current));
       setIsAllOpen(true);
       timer.current = setTimeout(() => {
         setIsAllOpen(false);
-      }, (level - 1) * 3 * 1000);
+      }, (level.current - 1) * 3 * 1000);
     };
 
     if (timer.current) clearTimeout(timer.current);
