@@ -1,6 +1,6 @@
 .start-button {
   outline: none;
-  border: 2px solid var(--dark-color);
+  border: 3px solid var(--dark-color);
   color: var(--dark-main-color);
   font-size: 20px;
   cursor: pointer;
@@ -8,6 +8,7 @@
   height: 40px;
   transition: all 0.4s;
   margin-top: 20px;
+  border-radius: 4px;
 }
 .start-button:hover {
   color: var(--dark-color);

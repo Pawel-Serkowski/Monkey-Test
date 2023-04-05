@@ -22,29 +22,29 @@ const BoxContainer = (props) => {
 
   const checkCorrectness = (clicked_number) => {
     if (clicked_number !== correctNextNumber.current) {
+      //user fail
       setIsAllOpen(true);
-      props.func();
-      props.func("You failed");
+      props.func("You failed!");
       return true;
     }
     correctNextNumber.current = correctNextNumber.current + 1;
     if (clicked_number === how_many_tiles) {
+      //user win
       props.func("You Won!");
     }
     return false;
   };
 
   useEffect(() => {
-    const hideTilesHandler = () => {
-      setIsAllOpen(false);
-    };
     const showTilesHandler = () => {
       setTiles(generateLevel(level));
       setIsAllOpen(true);
-      timer.current = setTimeout(hideTilesHandler, (level - 1) * 3 * 1000);
+      timer.current = setTimeout(() => {
+        setIsAllOpen(false);
+      }, (level - 1) * 3 * 1000);
     };
-    if (timer.current) clearTimeout(timer.current);
 
+    if (timer.current) clearTimeout(timer.current);
     if (!props.isGameStarted) {
       setIsAllOpen(true);
       correctNextNumber.current = 1;

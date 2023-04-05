@@ -6,7 +6,6 @@ const generateLevel = (level) => {
       shelf = Math.floor(Math.random() * (level * level) + 1);
       if (tiles[shelf - 1] === undefined) break;
     }
-
     tiles[shelf - 1] = i + 1;
   }
   return tiles;
